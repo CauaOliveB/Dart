@@ -5,6 +5,7 @@ void main() {
   print("""Hello, good morning!
         Welcome to PharmaHelp""");
 
+  customer();
 
 };
 
@@ -34,24 +35,44 @@ dynamic cart() {
 
   switch(option) {
       case 0:
-        myCart.add(products[0]);  
-        myCart[0]['stock'] -=1
+        try {
+          print("How much" [0] "you want:");
+          int quantity = int.parse(stdin.readLineSync()!);
+          if (product[0]['stock'] == 0) {
+            throw negativeNumberException('Input number cannot be negative')
+          };
+        }
         break;
       case 1:
-        myCart.add(products[1])
-        myCart[1 ]['stock'] -=1
+        try {
+          print("How much" [1] "you want:");
+          int quantity = int.parse(stdin.readLineSync()!);
+          if (product[1]['stock'] == 0) {
+            throw negativeNumberException('Input number cannot be negative')
+          };
+        }
         break;
       case 2:
-        myCart.add(products[2])
-        myCart[2]['stock'] -=1
+        try {
+          print("How much" [2] "you want:");
+          int quantity = int.parse(stdin.readLineSync()!);
+          if (product[2]['stock'] == 0) {
+            throw negativeNumberException('Input number cannot be negative')
+          };
+        }
         break;
       case 3:
-        myCart.add(products[3])
-        myCart[3]['stock'] -=1
+        try {
+          print("How much" [3] "you want:");
+          int quantity = int.parse(stdin.readLineSync()!);
+          if (product[3]['stock'] == 0) {
+            throw negativeNumberException('Input number cannot be negative')
+          };
+        }
         break;
-      
   }
 
+  int moreItems = 0; 
   print("""You wish to include more items?
     [1] Yes
     [2] No """);
@@ -60,8 +81,33 @@ dynamic cart() {
 
   while (moreItems == 1);
     print("Enter the product number:");
-    String option = int.parse(stdin.readLineSync()!);
+  String option = int.parse(stdin.readLineSync()!);
 
+  switch(option) {
+      case 0:
+        print("How much" [0] "you want:")
+        int quantity = int.parse(stdin.readLineSync()!);
+        if (product[0]['stock'] == 0) {
+
+        }
+        myCart.add(products[0] =+ quantity);  
+        break;
+      case 1:
+       print("How much" [1] "you want:")
+        int quantity = int.parse(stdin.readLineSync()!);
+        myCart.add(products[1] =+ quantity);  
+        break;
+      case 2:
+        print("How much" [2] "you want:")
+        int quantity = int.parse(stdin.readLineSync()!);
+        myCart.add(products[2] =+ quantity);  
+        break;
+      case 3:
+        print("How much" [3] "you want:")
+        int quantity = int.parse(stdin.readLineSync()!);
+        myCart.add(products[3] =+ quantity);  
+        break;
+  }
     if (moreItems == 2) {
     print("\nProducts:");
 
@@ -73,7 +119,6 @@ dynamic cart() {
       index++;
     }
   }
-
 }
 
 dynamic paymentMethod() {

@@ -10,6 +10,5 @@ void main() {
     print("Range Error");
   } catch (e) {
     print("Not recoginized error: $e");
-  }
-  ;
+  };
 }
