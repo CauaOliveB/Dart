@@ -1,4 +1,3 @@
-import "dart:io";
 
 void main() {
   int grade1 = 10, grade2 = 3, grade3 = 2, grade4 = 0, grade5 = 2;

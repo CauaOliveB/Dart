@@ -1,4 +1,4 @@
-import "dart.io";
+/*
 
 class Human{ //Classe Humano
   String name=""; //Caracteristíca ou atributo
@@ -51,3 +51,5 @@ void main() {
   Josue.etnicity = "Brown";
   Vinicius.weight = 92.02;
 }
+
+*/

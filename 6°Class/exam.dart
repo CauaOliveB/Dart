@@ -6,20 +6,39 @@ void main() {
         Welcome to PharmaHelp""");
 
   Customer();
-  Cart();
-
 }
 
-String Customer() {
+
+String? Customer() {
+
   print("Please enter your name:");
-  String? customerName = stdin.readLineSync()!;
-  print("Please enter your CPF:");
-  String? document = stdin.readLineSync()!;
+  String? customerName = stdin.readLineSync();
 
-  return ("Client: $customerName | Document: $document");
+  print("Please enter your CPF:");
+  String? document = stdin.readLineSync();
+
+    do{
+      try {
+      String? customerName = stdin.readLineSync();
+    }  on FormatException{
+      print("Customer name cannot be empty, null or have spaces.");
+    } catch(e){
+      print("Seu erro $e");
+    }
+
+    try {
+      String? document = stdin.readLineSync();
+    } on FormatException{
+      print("Document cannot be empty, null or have spaces.");
+    }catch(e){
+      print("seu erro $e");
+    }
+
+    }while(customerName == null || customerName.trim().isEmpty || document == null || document.trim().isEmpty);
+
 }
 
-
+/*
 dynamic Cart() {
   List<Map<String, dynamic>> products = 
   [{'name' : 'Antacid', 'price' : [8.00], 'stock' : [8]}, 
@@ -27,48 +46,39 @@ dynamic Cart() {
   {'name' : 'Antihistamine', 'price' : [22.00],'stock' : [16]}, 
   {'name' : 'Burn Ointment', 'price' : [17.00], 'stock' : [13]}];
 
-  List <String> myCart = [];
+  List <Map<String, dynamic>> myCart = [];
   
- 
   print("""You want to start shopping
           [1]Yes
           [2]Finish""");
 
-   int option = int.parse(stdin.readLineSync()!);
-
-  try {
-    // ignore: unused_local_variable
+        stdout.write("[1] | [2] :");
     int option = int.parse(stdin.readLineSync()!);
-  } catch (e) {
-    print("Not recoginized option: $e");
-  }
-
 
 while (option == 1){
-   for(int i=0; i< products.length; i++){
+  for(int i=0; i< products.length; i++){
     print("$i ; ${products[i]["name"]} - ${products[i]["price"].toStringAsFixed(2)} BRL ${products[i]["stock"]}}");
   }
-  
 
-stdout.write("Enter the product number you wish to add:");
-try {
-  String? input = stdin.readLineSync();
-  if (input == null || input.trim().isEmpty) {
-    throw FormatException("Input cannot be empty.");
-  }
-  option = int.parse(input); 
-  } on FormatException {
-      print("Invalid input. Please enter a valid number.");
-      continue; 
+  stdout.write("Enter the product number you wish to add:");
+  try {
+    String? input = stdin.readLineSync();
+    if (input == null || input.trim().isEmpty) {
+      throw FormatException("Input cannot be empty.");
     }
-
-  print("""You want to continue shopping
-        [1]Yes
-        [2]Finish""");
-
-      if (option == 2) {
-        break;
+    option = int.parse(input); 
+    } on FormatException {
+        print("Invalid input. Please enter a valid number.");
+        continue; 
       }
+
+    print("""You want to continue shopping
+          [1]Yes
+          [2]Finish""");
+
+        if (option == 2) {
+          break;
+    }
 }
 
 }
@@ -105,16 +115,11 @@ try {
     print("\nProducts:");
 
     double total = 0;
-    int index = 0;
-    while (index < myCart.length) {
-      print("- ${myCart[index]["name"]}: R\$ ${myCart[index]["price"]}");
-      total += myCart[index]["price"];
-      index++;
-    }
+
   }
 }
 
 dynamic paymentMethod() {
+*/
 
-}
 

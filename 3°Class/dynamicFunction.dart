@@ -1,4 +1,3 @@
-import 'dart:io';
 
 void main(){
   dynamic p = identificacao("Carlos", 23, "Sumaré");

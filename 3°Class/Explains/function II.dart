@@ -1,4 +1,3 @@
-import 'dart:io';
 
 void  main(){
   soma(20,30);
