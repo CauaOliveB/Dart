@@ -5,83 +5,76 @@ void main() {
   print("""Hello, good morning!
         Welcome to PharmaHelp""");
 
-  customer();
+  Customer();
+  Cart();
 
-};
+}
 
-String customer() {
+String Customer() {
   print("Please enter your name:");
-  String customerName = stdin.readLineSync()!;
+  String? customerName = stdin.readLineSync()!;
   print("Please enter your CPF:");
-  String document = stdin.readLineSync()!;
+  String? document = stdin.readLineSync()!;
+
+  return ("Client: $customerName | Document: $document");
 }
 
 
-dynamic cart() {
+dynamic Cart() {
   List<Map<String, dynamic>> products = 
   [{'name' : 'Antacid', 'price' : [8.00], 'stock' : [8]}, 
   {'name' : 'Diapers', 'price' : [16.00], 'stock' : [36]}, 
   {'name' : 'Antihistamine', 'price' : [22.00],'stock' : [16]}, 
-  {'name' : 'Burn Ointment', 'price' : [17.00] : 'stock' : [13]}];
+  {'name' : 'Burn Ointment', 'price' : [17.00], 'stock' : [13]}];
 
   List <String> myCart = [];
   
-  for(int i=0; i< products.length; i++){
-    print("$i ; ${products[i]["name"], ${products[i]["price"]}}");
+ 
+  print("""You want to start shopping
+          [1]Yes
+          [2]Finish""");
+
+   int option = int.parse(stdin.readLineSync()!);
+
+  try {
+    // ignore: unused_local_variable
+    int option = int.parse(stdin.readLineSync()!);
+  } catch (e) {
+    print("Not recoginized option: $e");
+  }
+
+
+while (option == 1){
+   for(int i=0; i< products.length; i++){
+    print("$i ; ${products[i]["name"]} - ${products[i]["price"].toStringAsFixed(2)} BRL ${products[i]["stock"]}}");
   }
   
-  print("Enter the product number:");
-  String option = int.parse(stdin.readLineSync()!);
 
-  switch(option) {
-      case 0:
-        try {
-          print("How much" [0] "you want:");
-          int quantity = int.parse(stdin.readLineSync()!);
-          if (product[0]['stock'] == 0) {
-            throw negativeNumberException('Input number cannot be negative')
-          };
-        }
-        break;
-      case 1:
-        try {
-          print("How much" [1] "you want:");
-          int quantity = int.parse(stdin.readLineSync()!);
-          if (product[1]['stock'] == 0) {
-            throw negativeNumberException('Input number cannot be negative')
-          };
-        }
-        break;
-      case 2:
-        try {
-          print("How much" [2] "you want:");
-          int quantity = int.parse(stdin.readLineSync()!);
-          if (product[2]['stock'] == 0) {
-            throw negativeNumberException('Input number cannot be negative')
-          };
-        }
-        break;
-      case 3:
-        try {
-          print("How much" [3] "you want:");
-          int quantity = int.parse(stdin.readLineSync()!);
-          if (product[3]['stock'] == 0) {
-            throw negativeNumberException('Input number cannot be negative')
-          };
-        }
-        break;
+stdout.write("Enter the product number you wish to add:");
+try {
+  String? input = stdin.readLineSync();
+  if (input == null || input.trim().isEmpty) {
+    throw FormatException("Input cannot be empty.");
   }
+  option = int.parse(input); 
+  } on FormatException {
+      print("Invalid input. Please enter a valid number.");
+      continue; 
+    }
 
-  int moreItems = 0; 
-  print("""You wish to include more items?
-    [1] Yes
-    [2] No """);
+  print("""You want to continue shopping
+        [1]Yes
+        [2]Finish""");
+
+      if (option == 2) {
+        break;
+      }
+}
+
+}
 
   moreItems = int.parse(stdin.readLineSync()!);
-
-  while (moreItems == 1);
-    print("Enter the product number:");
-  String option = int.parse(stdin.readLineSync()!);
+;
 
   switch(option) {
       case 0:
@@ -93,7 +86,7 @@ dynamic cart() {
         myCart.add(products[0] =+ quantity);  
         break;
       case 1:
-       print("How much" [1] "you want:")
+       print("How much" [1]  "you want:");
         int quantity = int.parse(stdin.readLineSync()!);
         myCart.add(products[1] =+ quantity);  
         break;

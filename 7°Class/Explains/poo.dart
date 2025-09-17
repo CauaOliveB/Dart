@@ -15,7 +15,7 @@ Human(this.name, this.age, this.gender, this.etnicity, this.weight);
 
 void main() {
   //Classe utilizando construtor
-  Human Vinicius = Human("Vinicíus", 21, "M", "Brown", 92.02)
+  Human Vinicius = Human("Vinicíus", 21, "M", "Brown", 92.02);
 
   //Classe utilizada sem o construtor
   Human Vinicius = Human();
@@ -26,8 +26,8 @@ void main() {
   Vinicius.name = "Vinicius de Almeida Alves";
   Vinicius.age = 21;
   Vinicius.gender = "M";
-  Vinicius.etnicity = "Brown"
-  Vinicius.weight = 92.02
+  Vinicius.etnicity = "Brown";
+  Vinicius.weight = 92.02;
 
    Human Martha = Human();
   //Qual classe ele vai ser
@@ -37,8 +37,8 @@ void main() {
   Martha.name = "Martha de Ferreira Santos";
   Martha.age = 23;
   Martha.gender = "F";
-  Martha.etnicity = "Black"
-  Martha.weight = 92.02
+  Martha.etnicity = "Black";
+  Martha.weight = 92.02;
 
    Human Josue = Human();
   //Qual classe ele vai ser
@@ -48,6 +48,6 @@ void main() {
   Josue.name = "Josué Batista";
   Josue.age = 25;
   Josue.gender = "M";
-  Josue.etnicity = "Brown"
-  Vinicius.weight = 92.02
+  Josue.etnicity = "Brown";
+  Vinicius.weight = 92.02;
 }
