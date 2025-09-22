@@ -35,10 +35,9 @@ String? Customer() {
     }
 
     }while(customerName == null || customerName.trim().isEmpty || document == null || document.trim().isEmpty);
-
 }
 
-/*
+
 dynamic Cart() {
   List<Map<String, dynamic>> products = 
   [{'name' : 'Antacid', 'price' : [8.00], 'stock' : [8]}, 
@@ -48,39 +47,10 @@ dynamic Cart() {
 
   List <Map<String, dynamic>> myCart = [];
   
-  print("""You want to start shopping
-          [1]Yes
-          [2]Finish""");
+  
 
-        stdout.write("[1] | [2] :");
-    int option = int.parse(stdin.readLineSync()!);
-
-while (option == 1){
-  for(int i=0; i< products.length; i++){
-    print("$i ; ${products[i]["name"]} - ${products[i]["price"].toStringAsFixed(2)} BRL ${products[i]["stock"]}}");
-  }
-
-  stdout.write("Enter the product number you wish to add:");
-  try {
-    String? input = stdin.readLineSync();
-    if (input == null || input.trim().isEmpty) {
-      throw FormatException("Input cannot be empty.");
-    }
-    option = int.parse(input); 
-    } on FormatException {
-        print("Invalid input. Please enter a valid number.");
-        continue; 
-      }
-
-    print("""You want to continue shopping
-          [1]Yes
-          [2]Finish""");
-
-        if (option == 2) {
-          break;
-    }
 }
-
+/*
 }
 
   moreItems = int.parse(stdin.readLineSync()!);
