@@ -5,38 +5,46 @@ void main() {
   print("""Hello, good morning!
         Welcome to PharmaHelp""");
 
-  Customer();
-  print("\n")
-  Cart();
-  print("\n")
-  paymentMethod();
 
 }
 
-//Client register and validv  v ation
+//Customer Registration
 
-String Customer() {
+String CustomerRegister() {
 
+  print("Please enter your name:");
+  String? customerName = stdin.readLineSync()!;
+
+  print("Please enter your CPF:");
+  String? cpf = stdin.readLineSync()!;
+
+  return("Name: $customerName | CPF:$cpf ");
+}
+
+//Customer Validation
+
+String CustomerValidation(String document){ 
+  
     do{
       try {
-      print("Please enter your name:");
-      String customerName = stdin.readLineSync();
-    }  on FormatException{
-      print("Customer name cannot be empty, null or have spaces.");
-    } catch(e){
-      print("Your error is $e");
-    }
+      CustomerRegister(customerName, cpf);
+      } on FormatException{
+        print("Customer name cannot be empty, null or have spaces.");
+      } catch(e){
+        print("Your error is $e");
+      }
 
-    try {
-      print("Please enter your CPF:");
-      String document = stdin.readLineSync();
-    } on FormatException{
-      print("Document cannot be empty, null or have spaces.");
-    }catch(e){
-      print("Your error is $e");
-    }
-
+      try {
+        print("Please enter your CPF:");
+        String? document = stdin.readLineSync()!;
+      } on FormatException{
+        print("Document cannot be empty, null or have spaces.");
+      }catch(e){
+        print("Your error is $e");
+      }
     }while(customerName == null || customerName.trim().isEmpty || document == null || document.trim().isEmpty);
+
+    return("Client : ");
 }
 
 dynamic Cart() {
@@ -50,20 +58,19 @@ dynamic Cart() {
 
   List <Map<String, dynamic>> myCart = [];
 
-  print("Let's start buying?
+  print("""Let's start buying?
   [1]Yes
   [2]No
-  ")
+  """);
 
   int buying = int.parse(stdin.readLineSync()!);
 
   if (buying == 1){
     for (int i = 0; i < products.length; i++) {
-      print("$i - ${products[i]["name"]} | BRL ${products[i]["price"].toStringAsFixed(2)} | Estoque: ${products[i]["stock"]}");
+      print("$i - ${products[i]["name"]} | BRL ${products[i]["price"].toStringAsFixed(2)} | Stock: ${products[i]["stock"]}");
     }
 
     do {
-      try{
       print("Enter the product number:");
       int option = int.parse(stdin.readLineSync()!);
 
@@ -75,32 +82,29 @@ dynamic Cart() {
       }     
       else if (quantity <= 0) {
         print(" Invalid quantity!");
-      } else if (quantity > products['stock']) {
-        print("Stock is not enough!");
-      } else {
-        myCart.add("$option - $quantity | Total : ")
-        products[option]["stock"] -= quantity;
-      } catch(e) {
-        throw ("You can not buy this amount, please enter a valid quantity")
       } 
-
-    print("Let's continue buying?
-    [1]Yes
-    [2]No
-    ")
+      else if (quantity > products[option]["stock"]) {
+        print("Stock is not enough!");
+      } 
+      else {
+        double total = products[option]['price'] *  quantity; 
+        myCart.add("$option - $quantity | Total $total : " as Map<String, dynamic>);
+        products[option]["stock"] -= quantity;
+      }
+      print("""Let's continue buying?
+      [1]Yes
+      [2]No
+      """);
+      
+      buying;
+      
+    } while (buying == 1);
     
-    buying;
-
-    } while (buying == 1)
-    
-
-
-  } else {
-    print("=========================");
-    print("Thank you for your preference!");
-    print("=========================");
-  }
-
+    } else {
+      print("=========================");
+      print("Thank you for your preference!");
+      print("=========================");
+    }
   }
 }
 
