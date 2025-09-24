@@ -7,7 +7,7 @@ void main() {
       print("Insert the final total of my cart :");
       cartPrice;
     } on FormatException {
-      print("Insert only numver, please fulffil the field again");
+      print("Insert only number, please fulffill the field again");
     }
 
     print("""What is the payment method:
