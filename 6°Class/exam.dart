@@ -33,7 +33,9 @@ cart();
 
 //==============Customer Validation==============
 
-String CustomerValidation(List<String> data){ 
+String CustomerValidation(){ 
+
+  data;
 
  do{
   try {
@@ -43,7 +45,7 @@ String CustomerValidation(List<String> data){
   }catch(e){ 
     print(e); 
   } 
- } while(data[0]!.trim().isEmpty || data[1]!.trim().isEmpty);
+ } while(data[0].trim().isEmpty || data[1].trim().isEmpty);
      print("Name and CPF cannot be empty. Please try again.");
     
   return "Name: ${data[0]} | CPF: ${data[1]}";
