@@ -5,41 +5,52 @@ void main() {
   print("""Hello, good morning!
         Welcome to PharmaHelp""");
 
+CustomerRegister();
+CustomerValidation();
+ShowProducts();
+cart();
+
 
 }
 
 //==============Customer Registration==============
 
-  Map<String, String> CustomerRegister() {
+  List CustomerRegister() {
+    
+    List<String> data = [];
+
     print("Please enter your name:");
     String name = stdin.readLineSync()!;
 
     print("Please enter your CPF:");
     String cpf = stdin.readLineSync()!;
-    
-    return {"name": name, "cpf": cpf};
+  
+  data.add(name);
+  data.add(cpf);
+  return(data);
 }
 
 
 //==============Customer Validation==============
 
-String CustomerValidation(){ 
- Map<String, String> data;
- 
-    do{
-      
-       data = CustomerRegister();
+String CustomerValidation(List<String> data){ 
 
-      if (data["name"]!.trim().isEmpty || data["cpf"]!.trim().isEmpty) {
-      print("Name and CPF cannot be empty. Please try again.");
-      }
-
-    }while(data["name"]!.trim().isEmpty || data["cpf"]!.trim().isEmpty);
-
-return "Name: ${data["name"]} | CPF: ${data["cpf"]}";
+ do{
+  try {
+    CustomerRegister();
+  } on FormatException {
+    print("Can not accept multiple types of characters");
+  }catch(e){ 
+    print(e); 
+  } 
+ } while(data[0]!.trim().isEmpty || data[1]!.trim().isEmpty);
+     print("Name and CPF cannot be empty. Please try again.");
+    
+  return "Name: ${data[0]} | CPF: ${data[1]}";
 }
 
 //==============Cart==============
+
 List<Map<String, dynamic>> products = [
   {'name': 'Antacid', 'price': 8.00, 'stock': 8},
   {'name': 'Diapers', 'price': 16.00, 'stock': 36},
@@ -47,7 +58,7 @@ List<Map<String, dynamic>> products = [
   {'name': 'Burn Ointment', 'price': 17.00, 'stock': 13}
 ];
 
-void showProducts() {
+void ShowProducts() {
   print("\n=== Available Products ===");
   for (int i = 0; i < products.length; i++) {
     print(
@@ -69,7 +80,7 @@ List<Map<String, dynamic>> cart() {
   }
 
   do {
-    showProducts();
+    ShowProducts();
 
     print("Enter the product number:");
     int option = int.parse(stdin.readLineSync()!);
@@ -107,7 +118,7 @@ List<Map<String, dynamic>> cart() {
   return myCart;
 }
 
-dynamic paymentMethod() {
+dynamic PaymentMethod(dynamic myCart) {
     print("""What is the payment method:
     [1] Cash
     [2] Credit Card
@@ -122,23 +133,25 @@ dynamic paymentMethod() {
     print("Select a valid payment method.");
     return;
   }
+  
+  myCart;
 
   switch (method) {
     case 1: // Cash
-      double finalValue = item["total"] - (item["total"] * 0.15);
+      double finalValue = myCart["total"] - (myCart["total"] * 0.15);
       print("You have to pay R\$ ${finalValue.toStringAsFixed(2)} (15% discount).");
       break;
     case 2: // Credit Card
-      double installment = item["total"] / 2;
+      double installment = myCart["total"] / 2;
       print("You have to pay 2 installments of R\$ ${installment.toStringAsFixed(2)}. ");
       break;
     case 3: // Debit Card
-      double finalValue = item["total"] + (item["total"] * 0.15);
+      double finalValue = myCart["total"] + (myCart["total"] * 0.15);
       print(
           "You have to pay total R\$ ${finalValue.toStringAsFixed(2)} (15% discount).");
       break;
     case 4: // PIX
-      print("You chose PIX. Total: R\$ ${item["total"].toStringAsFixed(2)} (20% discount)");
+      print("You chose PIX. Total: R\$ ${myCart["total"].toStringAsFixed(2)} (20% discount)");
       break;
       
     default:
