@@ -5,48 +5,43 @@ void main() {
   print("""Hello, good morning!
         Welcome to PharmaHelp""");
 
-CustomerRegister();
-CustomerValidation();
+CustomerRegisterValidation();
 ShowProducts();
 cart();
 
 
 }
 
-//==============Customer Registration==============
+//==============Customer Registration & Validationn==============
 
-  List CustomerRegister() {
-    
-    List<String> data = [];
+String CustomerRegisterValidation(){ 
 
-    print("Please enter your name:");
+ List<String> data = [];
+
+   print("Please enter your name:");
     String name = stdin.readLineSync()!;
 
     print("Please enter your CPF:");
     String cpf = stdin.readLineSync()!;
-  
+
   data.add(name);
   data.add(cpf);
-  return(data);
-}
 
-
-//==============Customer Validation==============
-
-String CustomerValidation(){ 
-
-  data;
-
+ while(data[0].trim().isEmpty || data[1].trim().isEmpty) {
+  throw ("Name and CPF cannot be empty. Please try again.");
+ }
+ 
  do{
   try {
-    CustomerRegister();
+   
+
   } on FormatException {
     print("Can not accept multiple types of characters");
   }catch(e){ 
     print(e); 
   } 
  } while(data[0].trim().isEmpty || data[1].trim().isEmpty);
-     print("Name and CPF cannot be empty. Please try again.");
+     print();
     
   return "Name: ${data[0]} | CPF: ${data[1]}";
 }
