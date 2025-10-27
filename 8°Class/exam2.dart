@@ -31,7 +31,7 @@ class Mamifero extends Animal {
 
   @override
   void emitirSom() {
-    print("mammal roars");
+    print("Mammal Roars");
   }
 }
 
@@ -51,7 +51,7 @@ class CRUDZoo{
 
   void ReadAnimals(){
 
-    print("\n--- Current Animal List ---");
+    print("\n=== Current Animal List ===");
 
     if (AnimalsList.isEmpty) {
         print("No animals registered.");
@@ -65,7 +65,7 @@ class CRUDZoo{
 
   void FilterReadAnimals(){
   
-    print("\n--- Filter Animals ---");
+    print("\n=== Filter Animals ===");
     print("[1] By Size (Porte)");
     print("[2] By Alimentation");
     print("[3] By Species (Contém parte do nome)");
@@ -150,9 +150,45 @@ class CRUDZoo{
     }
   }
 
-  }
-
   void CreateAnimal(){
+
+    print("\n=== Cadaster Animal ===\n");
+
+    print(
+      """
+        Animal Classification
+          [1] Mammal
+          [2] Bird
+      """
+    );
+
+    print("[4] By Family");
+    print("[5] By Age (Idade exata)");
+
+    stdout.write("Enter your filter choice (1-5): ");
+    String? choiceStr = stdin.readLineSync();
+    int? choice = int.tryParse(choiceStr ?? '');
+
+    if (choice == null || choice < 1 || choice > 5) {
+      print("Invalid option.");
+      return;
+    }
+
+
+    int classificationChoiche = int.parse(stdin.readLineSync()!);
+
+    if (classificationChoiche < 1 || classificationChoiche > 2 ){
+      print("Invalid option.");
+      return;
+    } 
+
+    CRUDZoo() {
+
+    AnimalsList.add(Mamifero("Red-Panda", 2, "Omnivore", "Ailuridae", "small size"));
+
+    AnimalsList.add();
+
+  }
 
   }
 
