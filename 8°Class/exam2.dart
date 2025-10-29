@@ -11,13 +11,13 @@ class Animal {
   Animal(this.specie, this.age, this.alimentation, this.family, this.size);
 
   void emitirSom() {
-    print("O animal faz um som");
+    print("The animal sing");
   }
 }
 
-class Ave extends Animal {
-  Ave(String specie, int age, String alimentation, String family, String size)
-      : super(specie, age, alimentation, family, size);
+class Bird extends Animal {
+  Bird(String specie, int age, String alimentation, String family, String size)
+    : super(specie, age, alimentation, family, size);
 
   @override
   void emitirSom() {
@@ -25,9 +25,14 @@ class Ave extends Animal {
   }
 }
 
-class Mamifero extends Animal {
-  Mamifero(String specie, int age, String alimentation, String family, String size)
-      : super(specie, age, alimentation, family, size);
+class Mammal extends Animal {
+  Mammal(
+    String specie,
+    int age,
+    String alimentation,
+    String family,
+    String size,
+  ) : super(specie, age, alimentation, family, size);
 
   @override
   void emitirSom() {
@@ -35,36 +40,58 @@ class Mamifero extends Animal {
   }
 }
 
-class CRUDZoo{
+class Amphibian extends Animal {
+  Amphibian(
+    String specie,
+    int age,
+    String alimentation,
+    String family,
+    String size,
+  ) : super(specie, age, alimentation, family, size);
 
+  @override
+  void emitirSom() {
+    print("Amphibian croaks");
+  }
+}
+
+class CRUDZoo {
   List<Animal> AnimalsList = [];
 
   CRUDZoo() {
-
-    AnimalsList.add(Mamifero("Red-Panda", 2, "Omnivore", "Ailuridae", "small size"));
-    AnimalsList.add(Mamifero("Bengal-Tiger", 3, "Carnivore", "Ailuridae", "large size"));
-    AnimalsList.add(Ave("Harpy", 1, "Omnivore", "Accipitridae", "medium size"));
-    AnimalsList.add(Mamifero("Elephant", 15, "Herbivore", "Elephantidae", "large size"));
-    AnimalsList.add(Mamifero("Squirrel", 1, "Omnivore", "Sciuridae", "small size"));
-
+    AnimalsList.add(
+      Mammal("Red-Panda", 2, "Omnivore", "Ailuridae", "small size"),
+    );
+    AnimalsList.add(
+      Mammal("Bengal-Tiger", 3, "Carnivore", "Ailuridae", "large size"),
+    );
+    AnimalsList.add(
+      Bird("Harpy", 1, "Omnivore", "Accipitridae", "medium size"),
+    );
+    AnimalsList.add(
+      Mammal("Elephant", 15, "Herbivore", "Elephantidae", "large size"),
+    );
+    AnimalsList.add(
+      Mammal("Squirrel", 1, "Omnivore", "Sciuridae", "small size"),
+    );
   }
 
-  void ReadAnimals(){
-
+  void ReadAnimals() {
     print("\n=== Current Animal List ===");
 
     if (AnimalsList.isEmpty) {
-        print("No animals registered.");
+      print("No animals registered.");
     }
-  
-    for( var i = 0; i < AnimalsList.length; i++ ) {
-      print("$i - Species: ${AnimalsList[i].specie} | Alimentation : ${AnimalsList[i].alimentation} | Age : ${AnimalsList[i].age} | Family : ${AnimalsList[i].family} | Size : ${AnimalsList[i].size}");
-    };
 
+    for (var i = 0; i < AnimalsList.length; i++) {
+      print(
+        "$i - Species: ${AnimalsList[i].specie} | Alimentation : ${AnimalsList[i].alimentation} | Age : ${AnimalsList[i].age} | Family : ${AnimalsList[i].family} | Size : ${AnimalsList[i].size}",
+      );
+    }
+    ;
   }
 
-  void FilterReadAnimals(){
-  
+  void FilterReadAnimals() {
     print("\n=== Filter Animals ===");
     print("[1] By Size (Porte)");
     print("[2] By Alimentation");
@@ -96,33 +123,33 @@ class CRUDZoo{
       case 1: // Size
         filterType = "Size";
         String sizeFilter = filterValue.toLowerCase();
-        filteredList = AnimalsList
-            .where((a) => a.size.toLowerCase() == sizeFilter)
-            .toList();
+        filteredList = AnimalsList.where(
+          (a) => a.size.toLowerCase() == sizeFilter,
+        ).toList();
         break;
 
       case 2: // Alimentation
         filterType = "Alimentation";
         String alimentationFilter = filterValue.toLowerCase();
-        filteredList = AnimalsList
-            .where((a) => a.alimentation.toLowerCase() == alimentationFilter)
-            .toList();
+        filteredList = AnimalsList.where(
+          (a) => a.alimentation.toLowerCase() == alimentationFilter,
+        ).toList();
         break;
 
       case 3: // Species (Contains)
         filterType = "Species (contains)";
         String specieFilter = filterValue.toLowerCase();
-        filteredList = AnimalsList
-            .where((a) => a.specie.toLowerCase().contains(specieFilter))
-            .toList();
+        filteredList = AnimalsList.where(
+          (a) => a.specie.toLowerCase().contains(specieFilter),
+        ).toList();
         break;
 
       case 4: // Family
         filterType = "Family";
         String familyFilter = filterValue.toLowerCase();
-        filteredList = AnimalsList
-            .where((a) => a.family.toLowerCase() == familyFilter)
-            .toList();
+        filteredList = AnimalsList.where(
+          (a) => a.family.toLowerCase() == familyFilter,
+        ).toList();
         break;
 
       case 5: // Age
@@ -132,9 +159,7 @@ class CRUDZoo{
           print("Age must be a valid integer.");
           return;
         }
-        filteredList = AnimalsList
-            .where((a) => a.age == ageFilter)
-            .toList();
+        filteredList = AnimalsList.where((a) => a.age == ageFilter).toList();
         break;
     }
 
@@ -145,69 +170,89 @@ class CRUDZoo{
       print("\n--- Animals Found ($filterType: $filterValue) ---");
       for (var i = 0; i < filteredList.length; i++) {
         Animal current = filteredList[i];
-        print("$i - Species: ${current.specie} | Alimentation: ${current.alimentation} | Age: ${current.age} | Family: ${current.family} | Size: ${current.size}");
+        print(
+          "$i - Species: ${current.specie} | Alimentation: ${current.alimentation} | Age: ${current.age} | Family: ${current.family} | Size: ${current.size}",
+        );
       }
     }
   }
 
-  void CreateAnimal(){
+  void CreateAnimal() {
+    print("\n=== Register New Animal ===");
 
-    print("\n=== Cadaster Animal ===\n");
+    int continueChoice = 1;
 
-    print(
-      """
-        Animal Classification
-          [1] Mammal
-          [2] Bird
-      """
-    );
+    while (continueChoice == 1) {
+      print("""
 
-    print("[4] By Family");
-    print("[5] By Age (Idade exata)");
+    Select the animal type:
+    [1] Mammal
+    [2] Bird
+    [3] Amphibian
 
-    stdout.write("Enter your filter choice (1-5): ");
-    String? choiceStr = stdin.readLineSync();
-    int? choice = int.tryParse(choiceStr ?? '');
+    """);
 
-    if (choice == null || choice < 1 || choice > 5) {
-      print("Invalid option.");
-      return;
+      stdout.write("Enter your choice: ");
+      int? typeChoice = int.tryParse(stdin.readLineSync() ?? '');
+
+      if (typeChoice == null || typeChoice < 1 || typeChoice > 3) {
+        print("Invalid option.");
+        return;
+      }
+
+      stdout.write("Enter species: ");
+      String specie = stdin.readLineSync() ?? '';
+
+      stdout.write("Enter age: ");
+      int age = int.parse(stdin.readLineSync() ?? '0');
+
+      stdout.write("Enter alimentation: ");
+      String alimentation = stdin.readLineSync() ?? '';
+
+      stdout.write("Enter family: ");
+      String family = stdin.readLineSync() ?? '';
+
+      stdout.write("Enter size: ");
+      String size = stdin.readLineSync() ?? '';
+
+      Animal newAnimal;
+
+      switch (typeChoice) {
+        case 1:
+          newAnimal = Mammal(specie, age, alimentation, family, size);
+          break;
+        case 2:
+          newAnimal = Bird(specie, age, alimentation, family, size);
+          break;
+        case 3:
+          newAnimal = Amphibian(specie, age, alimentation, family, size);
+          break;
+        default:
+          print("Invalid option.");
+          return;
+      }
+
+      AnimalsList.add(newAnimal);
+
+      print("\n Animal added successfully!");
+      print("Do you want to register another animal? [1] Yes | [2] No");
+      continueChoice = int.parse(stdin.readLineSync() ?? '2');
     }
-
-
-    int classificationChoiche = int.parse(stdin.readLineSync()!);
-
-    if (classificationChoiche < 1 || classificationChoiche > 2 ){
-      print("Invalid option.");
-      return;
-    } 
-
-    CRUDZoo() {
-
-    AnimalsList.add(Mamifero("Red-Panda", 2, "Omnivore", "Ailuridae", "small size"));
-
-    AnimalsList.add();
-
   }
 
+  void UpdateAnimal() {}
+  
+  void DeleteAnimal() {
+    AnimalsList.remove();
   }
-
-  void UpdateAnimal(){
-
-  }
-
-  void DeleteAnimal(){
-
-  }
-
 }
 
 void main() {
-print("Welcome to ZOOMANGE");
-print("\n");
+  print("Welcome to ZOOMANGE");
+  print("\n");
 
   print("===== MENU =====");
-  
+
   print("""
 
       [1] Register New Animals
@@ -223,28 +268,16 @@ print("\n");
   var Controller = CRUDZoo(); // cria um objeto da classe CRUDZoo
 
   if (choice == 1) {
-    Controller.CreateAnimal();   // chama o método
-  }
-
-  else if (choice == 2) {
+    Controller.CreateAnimal(); // chama o método
+  } else if (choice == 2) {
     Controller.ReadAnimals();
-  }
-
-  else if (choice == 3) {
+  } else if (choice == 3) {
     Controller.UpdateAnimal();
-  }
-
-  else if (choice == 4) {
+  } else if (choice == 4) {
     Controller.DeleteAnimal();
-  }
-
-  else if (choice == 5) {
+  } else if (choice == 5) {
     Controller.FilterReadAnimals();
-  }
-
-  else{
+  } else {
     print("Thank you for visiting ZOOMANGE, come back anytime!");
   }
-
 }
-  
