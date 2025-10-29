@@ -58,6 +58,7 @@ class Amphibian extends Animal {
 class CRUDZoo {
   List<Animal> AnimalsList = [];
 
+  
   CRUDZoo() {
     AnimalsList.add(
       Mammal("Red-Panda", 2, "Omnivore", "Ailuridae", "small size"),
@@ -83,7 +84,7 @@ class CRUDZoo {
       print("No animals registered.");
     }
 
-    for (var i = 0; i < AnimalsList.length; i++) {
+    for (i) {
       print(
         "$i - Species: ${AnimalsList[i].specie} | Alimentation : ${AnimalsList[i].alimentation} | Age : ${AnimalsList[i].age} | Family : ${AnimalsList[i].family} | Size : ${AnimalsList[i].size}",
       );
@@ -177,7 +178,7 @@ class CRUDZoo {
     }
   }
 
-  void CreateAnimal() {
+  void AnimalRegister() {
     print("\n=== Register New Animal ===");
 
     int continueChoice = 1;
@@ -185,19 +186,19 @@ class CRUDZoo {
     while (continueChoice == 1) {
       print("""
 
-    Select the animal type:
-    [1] Mammal
-    [2] Bird
-    [3] Amphibian
+      Select the animal type:
+      [1] Mammal
+      [2] Bird
+      [3] Amphibian
 
-    """);
+      """);
 
       stdout.write("Enter your choice: ");
       int? typeChoice = int.tryParse(stdin.readLineSync() ?? '');
 
       if (typeChoice == null || typeChoice < 1 || typeChoice > 3) {
         print("Invalid option.");
-        return;
+          return;
       }
 
       stdout.write("Enter species: ");
@@ -220,30 +221,53 @@ class CRUDZoo {
       switch (typeChoice) {
         case 1:
           newAnimal = Mammal(specie, age, alimentation, family, size);
+          AnimalsList.add(newAnimal);
           break;
         case 2:
           newAnimal = Bird(specie, age, alimentation, family, size);
+          AnimalsList.add(newAnimal);
           break;
         case 3:
           newAnimal = Amphibian(specie, age, alimentation, family, size);
+          AnimalsList.add(newAnimal);
           break;
         default:
           print("Invalid option.");
           return;
       }
 
-      AnimalsList.add(newAnimal);
-
       print("\n Animal added successfully!");
       print("Do you want to register another animal? [1] Yes | [2] No");
-      continueChoice = int.parse(stdin.readLineSync() ?? '2');
+      continueChoice = int.parse(stdin.readLineSync()!);
     }
   }
 
-  void UpdateAnimal() {}
-  
-  void DeleteAnimal() {
-    AnimalsList.remove();
+  void UpdateAnimal(i) {
+  print("\n=== Update New Animal ===");
+  int continueChoice = 1;
+
+  while (continueChoice == 1) {
+
+    
+    print("\n Animal updated successfully!");
+    print("Do you want to update another animal? [1] Yes | [2] No");
+    continueChoice = int.parse(stdin.readLineSync()!);
+  }
+
+  }
+
+  void DeleteAnimal(i) {
+  print("\n=== Delete New Animal ===");
+
+  int continueChoice = 1;
+
+  while (continueChoice == 1) {
+
+    }
+    
+      print("\n Animal deleted successfully!");
+      print("Do you want to delete another animal? [1] Yes | [2] No");
+      continueChoice = int.parse(stdin.readLineSync()!);
   }
 }
 
@@ -268,15 +292,93 @@ void main() {
   var Controller = CRUDZoo(); // cria um objeto da classe CRUDZoo
 
   if (choice == 1) {
-    Controller.CreateAnimal(); // chama o método
+    Controller.AnimalRegister(); // chama o método
+    
+    print("""\nYou want to continue?
+    
+    [1] Yes
+    [2] No
+    
+    """);
+
+    choice = int.parse(stdin.readLineSync()!);
+
+    while (choice == 1) {
+      main();
+
+      choice = int.parse(stdin.readLineSync()!); 
+    }
+
   } else if (choice == 2) {
     Controller.ReadAnimals();
+
+    print("""\nYou want to continue?
+    
+    [1] Yes
+    [2] No
+    
+    """);
+
+    choice = int.parse(stdin.readLineSync()!);
+
+    while (choice == 1) {
+      main();
+
+      choice = int.parse(stdin.readLineSync()!); 
+    }
+
   } else if (choice == 3) {
     Controller.UpdateAnimal();
+
+    print("""\nYou want to continue?
+    
+    [1] Yes
+    [2] No
+    
+    """);
+
+    choice = int.parse(stdin.readLineSync()!);
+
+    while (choice == 1) {
+      main();
+
+      choice = int.parse(stdin.readLineSync()!); 
+    }
+
   } else if (choice == 4) {
     Controller.DeleteAnimal();
+
+    print("""\nYou want to continue?
+    [1] Yes
+    [2] No
+    
+    """);
+
+    choice = int.parse(stdin.readLineSync()!);
+
+    while (choice == 1) {
+      main();
+
+      choice = int.parse(stdin.readLineSync()!); 
+    }
+
   } else if (choice == 5) {
     Controller.FilterReadAnimals();
+        print("""\nYou want to continue?
+    
+    [1] Yes
+    [2] No
+    
+    """);
+
+    choice = int.parse(stdin.readLineSync()!);
+
+    while (choice == 1) {
+      main();
+
+      choice = int.parse(stdin.readLineSync()!); 
+    }
+
   } else {
     print("Thank you for visiting ZOOMANGE, come back anytime!");
   }
